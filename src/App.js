@@ -1,4 +1,3 @@
-import './App.css';
 import AsyncSelect from 'react-select/async';
 
 function App() {
@@ -9,8 +8,6 @@ function App() {
 
     const response = await fetch('https://corsproxy.io/?' + encodeURIComponent(`https://query1.finance.yahoo.com/v1/finance/search?q=${inputValue}`),);
     const data = await response.json();
-    console.log(data);
-
     return data.quotes.map(data => ({value: data.symbol, label: data.symbol}));
   }
 
