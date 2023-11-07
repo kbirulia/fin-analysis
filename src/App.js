@@ -1,22 +1,17 @@
 import './App.css';
 import AsyncSelect from 'react-select/async';
-import axios from "axios";
 
 function App() {
   const promiseOptions = async (inputValue) => {
     if (!inputValue) {
       return [];
     }
-    console.log(inputValue);
 
-    const response = await axios({
-      method: 'get',
-      url: `/v1/finance/search?q=${inputValue}`,
-      withCredentials: false,
-    headers: {"Access-Control-Allow-Origin": "*"}
-    });
-    const options = response.data.quotes.map(data => ({value: data.symbol, label: data.symbol}));
-    return options
+    const response = await fetch('https://corsproxy.io/?' + encodeURIComponent(`https://query1.finance.yahoo.com/v1/finance/search?q=${inputValue}`),);
+    const data = await response.json();
+    console.log(data);
+
+    return data.quotes.map(data => ({value: data.symbol, label: data.symbol}));
   }
 
   return (
