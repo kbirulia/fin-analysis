@@ -26,7 +26,6 @@
     "predeploy": "yarn run build",
     "deploy": "gh-pages -d build"
   },
-  "proxy": "https://query1.finance.yahoo.com/",
   "eslintConfig": {
     "extends": [
       "react-app",
