@@ -1,15 +1,15 @@
 import React from 'react';
+
 import { Box, Container, CssBaseline } from '@mui/material';
-import StatisticForm from './StatisticForm/StatisticForm';
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { QueryClient, QueryClientProvider } from 'react-query';
 
-const queryClient = new QueryClient()
+import StatisticForm from './components/StatisticForm';
 
-function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-    <Container component='main' maxWidth='xl'>
-      <CssBaseline />
+const queryClient = new QueryClient();
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <Container component='main' maxWidth='xl'><CssBaseline />
       <Box
         sx={{
           width: 1,
@@ -22,8 +22,7 @@ function App() {
         <StatisticForm />
       </Box>
     </Container>
-    </QueryClientProvider>
-  );
-}
+  </QueryClientProvider>
+);
 
 export default App;

@@ -1,25 +1,18 @@
 import React from 'react';
 
-import { Alert, Grid } from '@mui/material';
-import AsyncSelect from 'react-select/async';
 import { LoadingButton } from '@mui/lab';
-import { useStatisticForm } from './useStatisticForm';
+import { Alert, Grid } from '@mui/material';
+
+import useStatisticForm from './useStatisticForm';
+import TickerSearch from '../TickerSearch';
 
 const StatisticForm = () => {
-  const { ref, loading, download, promiseOptions, error } = useStatisticForm();
+  const { setTickers, loading, disabled, error, download } = useStatisticForm();
 
   return (
     <Grid container spacing={2} justifyContent='center' alignItems='center'>
       <Grid item xs={5}>
-        <AsyncSelect
-          isMulti
-          cacheOptions
-          defaultOptions
-          loadOptions={promiseOptions}
-          ref={ref}
-          placeholder='Поиск по тикеру'
-          noOptionsMessage={() => 'Начните вводить тикер...'}
-        />
+        <TickerSearch setTicker={setTickers} />
       </Grid>
       <Grid item xs={2}>
         <LoadingButton
@@ -28,8 +21,9 @@ const StatisticForm = () => {
           variant='contained'
           onClick={download}
           loading={loading}
+          disabled={disabled}
         >
-          Скачать CSV
+          Upload CSV
         </LoadingButton>
       </Grid>
       {error ? <Grid item xs={7}><Alert severity='error'>
