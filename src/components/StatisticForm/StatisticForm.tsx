@@ -1,13 +1,22 @@
 import React from 'react';
 
+import DownloadIcon from '@mui/icons-material/Download';
 import { LoadingButton } from '@mui/lab';
-import { Alert, Grid } from '@mui/material';
+import { Alert, Button, ButtonGroup, Grid, Stack } from '@mui/material';
 
 import useStatisticForm from './useStatisticForm';
 import TickerSearch from '../TickerSearch';
 
 const StatisticForm = () => {
-  const { setTickers, loading, disabled, error, download } = useStatisticForm();
+  const {
+    download,
+    setTickers,
+    loading,
+    disabled,
+    error,
+    search,
+    data
+  } = useStatisticForm();
 
   return (
     <Grid container spacing={2} justifyContent='center' alignItems='center'>
@@ -17,13 +26,12 @@ const StatisticForm = () => {
       <Grid item xs={2}>
         <LoadingButton
           type='button'
-          fullWidth
           variant='contained'
-          onClick={download}
+          onClick={search}
           loading={loading}
           disabled={disabled}
         >
-          Upload CSV
+          Search
         </LoadingButton>
       </Grid>
       {error ? <Grid item xs={7}><Alert severity='error'>
