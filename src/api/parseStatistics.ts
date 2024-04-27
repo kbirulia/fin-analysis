@@ -11,9 +11,17 @@ const extractRatio = (node: HTMLElement, name: string): number | string => {
 export const parseStatistics = (data: string): Statistics => {
   try {
     const el = document.createElement('div');
-    el.innerHTML = data;
+    el.innerHTML =  data.slice(data.indexOf('<main'), data.indexOf('</main>'));
 
-    const [valuation, history, , dividends, , profit, effectiveness, income, balance] = el.querySelectorAll('[data-test="qsp-statistics"] table');
+
+    const tables = el.querySelectorAll('table');
+    const valuation = tables[0];
+    const dividends = tables[9];
+    const effectiveness = tables[3];
+    const profit = tables[2];
+    const income = tables[4];
+    const balance = tables[5];
+    const history = tables[7];
 
     const valuationCells = valuation.querySelectorAll('td');
     const dividendCells = dividends.querySelectorAll('td');
@@ -24,10 +32,10 @@ export const parseStatistics = (data: string): Statistics => {
     const historyCells = history.querySelectorAll('td');
 
     const statistics = {
-      [Ratios.priceToEarnings]: extractRatio(valuationCells[5], ratioTitles.priceToEarnings),
-      [Ratios.PEG]: extractRatio(valuationCells[9], ratioTitles.PEG),
-      [Ratios.priceToSales]: extractRatio(valuationCells[11], ratioTitles.priceToSales),
-      [Ratios.priceToBook]: extractRatio(valuationCells[13], ratioTitles.priceToBook),
+      [Ratios.priceToEarnings]: extractRatio(valuationCells[2*7+1], ratioTitles.priceToEarnings),
+      [Ratios.PEG]: extractRatio(valuationCells[4*7+1], ratioTitles.PEG),
+      [Ratios.priceToSales]: extractRatio(valuationCells[5*7+1], ratioTitles.priceToSales),
+      [Ratios.priceToBook]: extractRatio(valuationCells[6*7+1], ratioTitles.priceToBook),
       [Ratios.dividendYield]: extractRatio(dividendCells[7], ratioTitles.dividendYield),
       [Ratios.dividendPayout]: extractRatio(dividendCells[11], ratioTitles.dividendPayout),
       [Ratios.ROA]: extractRatio(effectivenessCells[1], ratioTitles.ROA),
