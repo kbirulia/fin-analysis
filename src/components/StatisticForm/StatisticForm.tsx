@@ -2,9 +2,10 @@ import React from 'react';
 
 import DownloadIcon from '@mui/icons-material/Download';
 import { LoadingButton } from '@mui/lab';
-import { Alert, Button, ButtonGroup, Grid, Stack } from '@mui/material';
+import { Alert, Grid, IconButton } from '@mui/material';
 
 import useStatisticForm from './useStatisticForm';
+import CompareTable from '../CompareTable';
 import TickerSearch from '../TickerSearch';
 
 const StatisticForm = () => {
@@ -33,10 +34,12 @@ const StatisticForm = () => {
         >
           Search
         </LoadingButton>
+        {!!data.length && <IconButton onClick={download}><DownloadIcon/></IconButton>}
       </Grid>
       {error ? <Grid item xs={7}><Alert severity='error'>
         {error}
       </Alert></Grid> : null}
+      {!!data.length && <CompareTable data={data} />}
     </Grid>
   );
 };

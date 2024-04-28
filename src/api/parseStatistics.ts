@@ -23,7 +23,11 @@ export const parseStatistics = (data: string): Statistics => {
     const balance = tables[5];
     const history = tables[7];
 
-    const valuationCells = valuation.querySelectorAll('td');
+    const priceToEarnings = valuation.querySelectorAll('tr')[3];
+    const PEG = valuation.querySelectorAll('tr')[5];
+    const priceToSales = valuation.querySelectorAll('tr')[6];
+    const priceToBook = valuation.querySelectorAll('tr')[7];
+
     const dividendCells = dividends.querySelectorAll('td');
     const effectivenessCells = effectiveness.querySelectorAll('td');
     const profitCells = profit.querySelectorAll('td');
@@ -32,10 +36,18 @@ export const parseStatistics = (data: string): Statistics => {
     const historyCells = history.querySelectorAll('td');
 
     const statistics = {
-      [Ratios.priceToEarnings]: extractRatio(valuationCells[2*7+1], ratioTitles.priceToEarnings),
-      [Ratios.PEG]: extractRatio(valuationCells[4*7+1], ratioTitles.PEG),
-      [Ratios.priceToSales]: extractRatio(valuationCells[5*7+1], ratioTitles.priceToSales),
-      [Ratios.priceToBook]: extractRatio(valuationCells[6*7+1], ratioTitles.priceToBook),
+      [Ratios.priceToEarnings]: extractRatio(
+        priceToEarnings.querySelectorAll('td')[1], ratioTitles.priceToEarnings
+      ),
+      [Ratios.PEG]: extractRatio(
+        PEG.querySelectorAll('td')[1], ratioTitles.PEG
+      ),
+      [Ratios.priceToSales]: extractRatio(
+        priceToSales.querySelectorAll('td')[1], ratioTitles.priceToSales
+      ),
+      [Ratios.priceToBook]: extractRatio(
+        priceToBook.querySelectorAll('td')[1], ratioTitles.priceToBook
+      ),
       [Ratios.dividendYield]: extractRatio(dividendCells[7], ratioTitles.dividendYield),
       [Ratios.dividendPayout]: extractRatio(dividendCells[11], ratioTitles.dividendPayout),
       [Ratios.ROA]: extractRatio(effectivenessCells[1], ratioTitles.ROA),
