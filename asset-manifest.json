@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/fin-analysis/static/js/main.0f761d51.js",
+    "main.js": "/fin-analysis/static/js/main.beb38bfe.js",
     "index.html": "/fin-analysis/index.html",
-    "main.0f761d51.js.map": "/fin-analysis/static/js/main.0f761d51.js.map"
+    "main.beb38bfe.js.map": "/fin-analysis/static/js/main.beb38bfe.js.map"
   },
   "entrypoints": [
-    "static/js/main.0f761d51.js"
+    "static/js/main.beb38bfe.js"
   ]
 }
